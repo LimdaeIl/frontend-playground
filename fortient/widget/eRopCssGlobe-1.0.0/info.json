@@ -1,0 +1,26 @@
+{
+    "name": "eRopCssGlobe",
+    "title": "CSS Globe",
+    "subTitle": "Animated CSS-only rotating globe",
+    "version": "1.0.0",
+    "published_date": 1775779200,
+    "releaseNotes": "available",
+    "metadata": {
+        "description": "CSS만으로 구현된 자전하는 지구본 위젯. JavaScript 없이 순수 CSS 애니메이션으로 동작합니다.",
+        "pages": [
+            "Dashboard",
+            "View Panel",
+            "Reports",
+            "Listing"
+        ],
+        "certified": "No",
+        "publisher": "Korea SE Team",
+        "snapshots": [],
+        "help_online": "",
+        "compatibility": [
+            "7.6.1",
+            "7.6.5"
+        ]
+    },
+    "development": false
+}

@@ -1,0 +1,204 @@
+﻿<!-- Copyright start
+  Copyright (C) 2008 - 2025 Fortinet Inc.
+  All rights reserved.
+  FORTINET CONFIDENTIAL & FORTINET PROPRIETARY SOURCE CODE
+  Copyright end -->
+
+<style>
+.okpi-edit-preview {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(34, 211, 238, 0.14), transparent 24%),
+    radial-gradient(circle at 84% 22%, rgba(59, 130, 246, 0.16), transparent 22%),
+    linear-gradient(120deg, #04111f 0%, #0a213f 28%, #0c3563 54%, #0a2242 76%, #04111f 100%);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(125, 211, 252, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.okpi-edit-preview-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #f8fbff;
+  line-height: 1.12;
+}
+
+.okpi-edit-preview-subtitle {
+  margin-top: 4px;
+  font-size: 10px;
+  color: rgba(191, 219, 254, 0.82);
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-weight: 700;
+}
+
+.okpi-edit-mini-grid {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.okpi-edit-mini-card {
+  flex: 1;
+  min-width: 0;
+  border-radius: 12px;
+  padding: 10px 10px 8px 10px;
+  background: rgba(2, 12, 24, 0.34);
+  border: 1px solid rgba(125, 211, 252, 0.12);
+}
+
+.okpi-edit-mini-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(191, 219, 254, 0.72);
+}
+
+.okpi-edit-mini-value {
+  margin-top: 6px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.okpi-edit-mini-meta {
+  margin-top: 5px;
+  font-size: 10px;
+  color: #7dd3fc;
+}
+</style>
+
+<form data-ng-submit="save()" class="noMargin" name="editWidgetForm"
+    data-ng-class="{'state-wait': processing }" novalidate>
+    <div class="modal-header">
+        <h3 class="modal-title col-md-9">KPI Board Settings</h3>
+        <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal" aria-label="Close"
+            id="close-edit-widget-form-btn">
+            <div aria-hidden="true" class="version-button">+</div>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="okpi-edit-preview">
+          <div class="okpi-edit-preview-title">{{ config.title }}</div>
+          <div class="okpi-edit-preview-subtitle">{{ config.subtitle }}</div>
+
+          <div class="okpi-edit-mini-grid">
+            <div class="okpi-edit-mini-card">
+              <div class="okpi-edit-mini-label">{{ config.card1Label }}</div>
+              <div class="okpi-edit-mini-value">{{ config.card1Value }}</div>
+              <div class="okpi-edit-mini-meta">{{ config.card1Meta }}</div>
+            </div>
+            <div class="okpi-edit-mini-card">
+              <div class="okpi-edit-mini-label">{{ config.card2Label }}</div>
+              <div class="okpi-edit-mini-value">{{ config.card2Value }}</div>
+              <div class="okpi-edit-mini-meta">{{ config.card2Meta }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label>Board Title</label>
+            <input type="text" class="form-control" data-ng-model="config.title" placeholder="KISA Security Overview" />
+        </div>
+
+        <div class="form-group">
+            <label>Board Subtitle</label>
+            <input type="text" class="form-control" data-ng-model="config.subtitle" placeholder="Threat posture and intelligence stream" />
+        </div>
+
+        <div class="form-group">
+            <label>Status Text</label>
+            <input type="text" class="form-control" data-ng-model="config.statusText" placeholder="LIVE VIEW" />
+        </div>
+
+        <hr />
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Card 1 Label</label>
+              <input type="text" class="form-control" data-ng-model="config.card1Label" />
+            </div>
+            <div class="form-group">
+              <label>Card 1 Value</label>
+              <input type="text" class="form-control" data-ng-model="config.card1Value" />
+            </div>
+            <div class="form-group">
+              <label>Card 1 Meta</label>
+              <input type="text" class="form-control" data-ng-model="config.card1Meta" />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Card 2 Label</label>
+              <input type="text" class="form-control" data-ng-model="config.card2Label" />
+            </div>
+            <div class="form-group">
+              <label>Card 2 Value</label>
+              <input type="text" class="form-control" data-ng-model="config.card2Value" />
+            </div>
+            <div class="form-group">
+              <label>Card 2 Meta</label>
+              <input type="text" class="form-control" data-ng-model="config.card2Meta" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Card 3 Label</label>
+              <input type="text" class="form-control" data-ng-model="config.card3Label" />
+            </div>
+            <div class="form-group">
+              <label>Card 3 Value</label>
+              <input type="text" class="form-control" data-ng-model="config.card3Value" />
+            </div>
+            <div class="form-group">
+              <label>Card 3 Meta</label>
+              <input type="text" class="form-control" data-ng-model="config.card3Meta" />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Card 4 Label</label>
+              <input type="text" class="form-control" data-ng-model="config.card4Label" />
+            </div>
+            <div class="form-group">
+              <label>Card 4 Value</label>
+              <input type="text" class="form-control" data-ng-model="config.card4Value" />
+            </div>
+            <div class="form-group">
+              <label>Card 4 Meta</label>
+              <input type="text" class="form-control" data-ng-model="config.card4Meta" />
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            <label>Footer Note</label>
+            <input type="text" class="form-control" data-ng-model="config.footerNote" placeholder="Last sync 2 minutes ago" />
+        </div>
+
+        <div class="form-group">
+            <label>Footer Badge</label>
+            <input type="text" class="form-control" data-ng-model="config.footerBadge" placeholder="INTELLIGENCE ACTIVE" />
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary">
+            <i class="icon icon-check margin-right-sm"></i>Save
+        </button>
+        <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default" data-ng-click="cancel()">
+            <i class="icon icon-close margin-right-sm"></i>Close
+        </button>
+    </div>
+</form>

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"C:/github/frontend-playground/fortient/widget/eRopCssGlobe-1.0.0/widgetAssets/js\")",
+      "Bash(mkdir -p \"C:/github/frontend-playground/fortient/widget/eRopCssGlobe-1.0.0/widgetAssets/locales\")"
+    ]
+  }
+}

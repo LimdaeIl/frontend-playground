@@ -1,0 +1,26 @@
+{
+    "name": "ftcbc",
+    "title": "Fortinet Korea CBC Banner",
+    "subTitle": "Fortinet Korea Customer Briefing Center branding banner widget",
+    "version": "1.0.0",
+    "published_date": 1742260800,
+    "releaseNotes": "available",
+    "metadata": {
+        "description": "Fortinet Korea CBC (Customer Briefing Center) branded banner with Fortinet shield logo, animated gradient background in Fortinet red\/orange, and SecOps product tag badges.",
+        "pages": [
+            "Dashboard",
+            "View Panel",
+            "Reports",
+            "Listing"
+        ],
+        "certified": "No",
+        "publisher": "sangilhan",
+        "snapshots": [],
+        "help_online": "",
+        "compatibility": [
+            "7.6.1",
+            "7.6.5"
+        ]
+    },
+    "development": false
+}

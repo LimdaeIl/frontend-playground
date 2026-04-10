@@ -1,0 +1,26 @@
+{
+    "name": "eRopShinhanBanner",
+    "title": "Shinhan Financial Group Banner",
+    "subTitle": "\uc2e0\ud55c\uae08\uc735\uadf8\ub8f9 \ube0c\ub79c\ub529 \ubc30\ub108 \uc704\uc82f (\uac00\ub85c\ud615, \uc560\ub2c8\uba54\uc774\uc158)",
+    "version": "1.0.0",
+    "published_date": 1743292800,
+    "releaseNotes": "available",
+    "metadata": {
+        "description": "\uc2e0\ud55c\uae08\uc735\uadf8\ub8f9 \ub85c\uace0\uc640 \ube0c\ub79c\ub4dc \uceec\ub7ec\ub97c \ud65c\uc6a9\ud55c \uac00\ub85c\ud615 \uc560\ub2c8\uba54\uc774\uc158 \ube0c\ub79c\ub529 \ubc30\ub108 \uc704\uc82f. \ud30c\ud2f0\ud074 \ud6a8\uacfc, \uae00\ub85c\uc6b0 \ud384\uc2a4, \uc2a4\ud06c\ub864 \ud2f0\ucee4\ub97c \ud3ec\ud568\ud569\ub2c8\ub2e4.",
+        "pages": [
+            "Dashboard",
+            "View Panel",
+            "Reports",
+            "Listing"
+        ],
+        "certified": "No",
+        "publisher": "Korea SE Team",
+        "snapshots": [],
+        "help_online": "",
+        "compatibility": [
+            "7.6.1",
+            "7.6.5"
+        ]
+    },
+    "development": false
+}

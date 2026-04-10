@@ -1,0 +1,13 @@
+{
+  "eRopKeimyungBanner": {
+    "BTN_CLOSE": "关闭",
+    "BTN_SAVE": "保存",
+    "LBL_TITLE": "小组件标题",
+    "LBL_MAIN_TITLE": "横幅主标题",
+    "LBL_TICKER": "滚动提示信息",
+    "PH_TICKER": "自定义提示信息（留空使用默认值）",
+    "TXT_LABEL_SOC": "SOC 运行中",
+    "TXT_LABEL_POWERED": "由 FortiSOAR 提供支持",
+    "LABEL_REFRESH": "刷新"
+  }
+}

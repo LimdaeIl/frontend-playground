@@ -1,0 +1,70 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/eRopShinhanBanner-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<form data-ng-submit="save()" class="noMargin" name="editForm"
+  data-ng-class="{'state-wait': processing}" novalidate>
+
+  <div class="modal-header">
+    <h3 class="modal-title col-md-9">Shinhan Banner 설정</h3>
+    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal"
+      aria-label="Close" id="close-edit-widget-form-btn">
+      <div aria-hidden="true" class="version-button">+</div>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <!-- Widget Title -->
+    <div class="form-group"
+      data-ng-class="{ 'has-error': editForm.title.$invalid && editForm.title.$touched }">
+      <label for="wgt-title" class="control-label">
+        {{ viewWidgetVars.LBL_TITLE || '위젯 제목' }}<span class="text-danger">*</span>
+      </label>
+      <input id="wgt-title" name="title" type="text" class="form-control"
+        data-ng-model="config.title" required
+        placeholder="Shinhan Financial Group Banner">
+      <div data-cs-messages="editForm.title"></div>
+    </div>
+
+    <!-- Main Title (배너 내 표시 제목) -->
+    <div class="form-group">
+      <label for="wgt-main-title" class="control-label">
+        {{ viewWidgetVars.LBL_MAIN_TITLE || '배너 메인 타이틀' }}
+      </label>
+      <input id="wgt-main-title" name="main_title" type="text" class="form-control"
+        data-ng-model="config.main_title"
+        placeholder="Security Operations Center">
+      <p class="help-block" style="font-size:11px;opacity:0.7;">
+        배너 중앙에 표시되는 제목입니다.
+      </p>
+    </div>
+
+    <!-- Ticker Text -->
+    <div class="form-group">
+      <label for="wgt-ticker" class="control-label">
+        {{ viewWidgetVars.LBL_TICKER || '스크롤 티커 메시지' }}
+      </label>
+      <input id="wgt-ticker" name="ticker_text" type="text" class="form-control"
+        data-ng-model="config.ticker_text"
+        placeholder="{{ viewWidgetVars.PH_TICKER || '커스텀 티커 메시지 (공백 시 기본값 사용)' }}">
+      <p class="help-block" style="font-size:11px;opacity:0.7;">
+        하단 스크롤 배너에 표시할 텍스트입니다. 비워두면 기본 메시지가 표시됩니다.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary">
+      <i class="icon icon-check margin-right-sm"></i>{{ viewWidgetVars.BTN_SAVE || 'Save' }}
+    </button>
+    <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default" data-ng-click="cancel()">
+      <i class="icon icon-close margin-right-sm"></i>{{ viewWidgetVars.BTN_CLOSE || 'Close' }}
+    </button>
+  </div>
+
+</form>

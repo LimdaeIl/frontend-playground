@@ -1,0 +1,69 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2026
+  Copyright end -->
+
+<form data-ng-submit="save()" class="noMargin" name="editForm" novalidate>
+  <div class="modal-header">
+    <h3 class="modal-title col-md-9">CSS Earth Globe Widget Settings</h3>
+    <button type="button"
+            class="close"
+            data-ng-click="cancel()"
+            data-dismiss="modal"
+            aria-label="Close"
+            id="close-edit-widget-form-btn">
+      <div aria-hidden="true" class="version-button">+</div>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="form-group"
+         data-ng-class="{ 'has-error': editForm.title.$invalid && editForm.title.$touched }">
+      <label for="wgt-title" class="control-label">
+        Title<span class="text-danger">*</span>
+      </label>
+      <input id="wgt-title"
+             name="title"
+             type="text"
+             class="form-control"
+             data-ng-model="config.title"
+             required
+             placeholder="Earth Globe">
+      <div data-cs-messages="editForm.title"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="wgt-caption" class="control-label">Caption</label>
+      <input id="wgt-caption"
+             name="caption"
+             type="text"
+             class="form-control"
+             data-ng-model="config.caption"
+             placeholder="Global Security Overview">
+    </div>
+
+    <div class="form-group">
+      <label for="wgt-empty-text" class="control-label">Empty Text</label>
+      <input id="wgt-empty-text"
+             name="emptyText"
+             type="text"
+             class="form-control"
+             data-ng-model="config.emptyText"
+             placeholder="No data to display.">
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary">
+      <i class="icon icon-check margin-right-sm"></i>Save
+    </button>
+    <button id="edit-widget-cancel"
+            type="button"
+            class="btn btn-sm btn-default"
+            data-ng-click="cancel()">
+      <i class="icon icon-close margin-right-sm"></i>Close
+    </button>
+  </div>
+</form>

@@ -1,0 +1,330 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/shinhanBanner-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<style type="text/css">
+/* ── shinhanBanner styles ──────────────────────────────────── */
+
+.shb-wrap {
+  position: relative;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+/* ── 배너 컨테이너 ── */
+.shb-banner {
+  position: relative;
+  width: 100%;
+  min-height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 20px 28px;
+  box-sizing: border-box;
+}
+
+/* ── 스타일 변형 ── */
+.shb-banner.shb-style-blue {
+  background: #0046FF;
+}
+.shb-banner.shb-style-dark {
+  background: #001F80;
+}
+.shb-banner.shb-style-gradient {
+  background: linear-gradient(135deg, #001F80 0%, #0046FF 50%, #3A7BFF 100%);
+}
+
+/* ── 배경 장식 원 ── */
+.shb-deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.shb-deco-circle-1 {
+  width: 220px;
+  height: 220px;
+  top: -80px;
+  right: -40px;
+  background: rgba(255,255,255,0.06);
+}
+.shb-deco-circle-2 {
+  width: 150px;
+  height: 150px;
+  bottom: -70px;
+  right: 80px;
+  background: rgba(255,255,255,0.04);
+}
+.shb-deco-circle-3 {
+  width: 80px;
+  height: 80px;
+  top: -20px;
+  right: 220px;
+  background: rgba(200,160,32,0.18);
+}
+
+/* ── 골드 사선 장식 ── */
+.shb-deco-lines {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.shb-deco-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(200,160,32,0.5), transparent);
+  transform-origin: left center;
+}
+.shb-deco-line-1 {
+  width: 220px;
+  top: 28%;
+  right: -20px;
+  transform: rotate(-20deg);
+}
+.shb-deco-line-2 {
+  width: 160px;
+  top: 55%;
+  right: 10px;
+  transform: rotate(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(200,160,32,0.3), transparent);
+}
+
+/* ── 로고 영역 ── */
+.shb-logo-area {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  margin-right: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.shb-logo-svg {
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+/* ── 구분선 ── */
+.shb-divider {
+  width: 2px;
+  height: 64px;
+  background: linear-gradient(180deg, transparent, rgba(200,160,32,0.7) 30%, rgba(200,160,32,0.7) 70%, transparent);
+  margin-right: 22px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── 텍스트 영역 ── */
+.shb-text-area {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+.shb-group-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.shb-group-name-en {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.shb-tagline {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.06em;
+}
+.shb-tagline-bar {
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: #C8A020;
+  margin-right: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* ── 우측 메타 정보 ── */
+.shb-meta-area {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 24px;
+  text-align: right;
+  position: relative;
+  z-index: 2;
+}
+.shb-est-badge {
+  display: inline-block;
+  border: 1px solid rgba(200,160,32,0.6);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 11px;
+  color: rgba(200,160,32,0.95);
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  background: rgba(200,160,32,0.08);
+}
+.shb-global-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ── 위젯 헤더 (타이틀 / 액션) ── */
+.shb-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.shb-widget-title {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+.shb-widget-actions {
+  display: flex;
+  align-items: center;
+}
+</style>
+
+<div class="widget widget-container shb-wrap">
+
+  <!-- 위젯 헤더 -->
+  <div class="display-flex-space-between margin-chart">
+    <div class="padding-right-0 padding-left-0"
+      data-ng-class="(page==='dashboard'||page==='reporting') ? 'widget-dashboard-title-width' : 'widget-title-width'">
+      <h5 class="widget-title" title="{{ config.title }}">{{ config.title }}</h5>
+    </div>
+    <div class="padding-right-0 padding-left-0"
+      data-ng-class="(page==='dashboard'||page==='reporting') ? 'widget-dashboard-actions-width' : 'widget-actions-width'">
+      <span class="fa btn widget-action-icon btn-sm pull-right"
+        data-ng-click="collapsed = !collapsed"
+        data-ng-class="{'fa-caret-up': !collapsed, 'fa-caret-down': collapsed}"></span>
+      <span data-ng-hide="page==='dashboard'||page==='reporting'"
+        class="icon icon-refresh btn btn-sm widget-action-icon pull-right"
+        data-ng-click="getList()"
+        data-uib-tooltip="{{ t.LABEL_REFRESH || 'Refresh' }}"></span>
+    </div>
+  </div>
+
+  <!-- 배너 본체 -->
+  <div data-ng-hide="collapsed">
+    <div class="shb-banner"
+      data-ng-class="{
+        'shb-style-blue':     config.banner_style === 'blue'     || !config.banner_style,
+        'shb-style-dark':     config.banner_style === 'dark',
+        'shb-style-gradient': config.banner_style === 'gradient'
+      }">
+
+      <!-- 배경 장식 -->
+      <div class="shb-deco-circle shb-deco-circle-1"></div>
+      <div class="shb-deco-circle shb-deco-circle-2"></div>
+      <div class="shb-deco-circle shb-deco-circle-3"></div>
+      <div class="shb-deco-lines">
+        <div class="shb-deco-line shb-deco-line-1"></div>
+        <div class="shb-deco-line shb-deco-line-2"></div>
+      </div>
+
+      <!-- 로고 -->
+      <div class="shb-logo-area" data-ng-if="config.show_logo !== false">
+        <!-- 신한금융그룹 심볼 SVG (구형 S 심볼) -->
+        <svg class="shb-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="shb-sphere-grad" cx="38%" cy="32%" r="65%">
+              <stop offset="0%"   stop-color="#6BAAFF"/>
+              <stop offset="45%"  stop-color="#1A6AFF"/>
+              <stop offset="100%" stop-color="#002EC0"/>
+            </radialGradient>
+            <radialGradient id="shb-shine" cx="35%" cy="28%" r="40%">
+              <stop offset="0%"   stop-color="rgba(255,255,255,0.35)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </radialGradient>
+            <clipPath id="shb-clip">
+              <circle cx="50" cy="50" r="46"/>
+            </clipPath>
+          </defs>
+
+          <!-- 구(球) 본체 -->
+          <circle cx="50" cy="50" r="47" fill="rgba(0,0,0,0.25)"/>
+          <circle cx="50" cy="50" r="46" fill="url(#shb-sphere-grad)"/>
+
+          <!-- 지구본 위도선 (subtle) -->
+          <g clip-path="url(#shb-clip)" opacity="0.25">
+            <ellipse cx="50" cy="50" rx="46" ry="14" fill="none" stroke="white" stroke-width="0.8"/>
+            <ellipse cx="50" cy="50" rx="46" ry="28" fill="none" stroke="white" stroke-width="0.6"/>
+            <!-- 경도선 -->
+            <line x1="50" y1="4" x2="50" y2="96" stroke="white" stroke-width="0.8"/>
+            <ellipse cx="50" cy="50" rx="20" ry="46" fill="none" stroke="white" stroke-width="0.6"/>
+          </g>
+
+          <!-- S 심볼 (핵심) — 두껍고 유려한 S 곡선 -->
+          <path
+            d="M 34,29
+               C 34,29 62,24 63,36
+               C 64,46 38,44 36,53
+               C 34,62 60,66 66,72"
+            fill="none"
+            stroke="white"
+            stroke-width="8.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            clip-path="url(#shb-clip)"/>
+
+          <!-- 구 광택 하이라이트 -->
+          <circle cx="50" cy="50" r="46" fill="url(#shb-shine)"/>
+
+          <!-- 테두리 골드 링 -->
+          <circle cx="50" cy="50" r="47" fill="none" stroke="#C8A020" stroke-width="1.5" opacity="0.7"/>
+        </svg>
+      </div>
+
+      <!-- 골드 구분선 -->
+      <div class="shb-divider" data-ng-if="config.show_divider !== false && config.show_logo !== false"></div>
+
+      <!-- 텍스트 -->
+      <div class="shb-text-area">
+        <div class="shb-group-name">{{ config.title || (t && t.GROUP_NAME) || '신한금융그룹' }}</div>
+        <div class="shb-group-name-en">Shinhan Financial Group</div>
+        <div class="shb-tagline" data-ng-if="config.show_tagline !== false">
+          <span class="shb-tagline-bar"></span>
+          <span>{{ config.subtitle || (t && t.TAGLINE) || '금융으로 세상을 이롭게' }}</span>
+        </div>
+      </div>
+
+      <!-- 우측 메타 -->
+      <div class="shb-meta-area">
+        <span class="shb-est-badge" data-ng-if="config.show_est !== false">
+          {{ (t && t.EST_YEAR) || 'Since 1982' }}
+        </span>
+        <span class="shb-global-text">
+          {{ (t && t.GLOBAL_TEXT) || 'Global Financial Group' }}
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

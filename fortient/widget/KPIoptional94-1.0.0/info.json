@@ -1,0 +1,23 @@
+{
+    "name": "KPIoptional94",
+    "title": "KPIoptional94",
+    "subTitle": "KPIoptional94",
+    "version": "1.0.0",
+    "publishedDate": 1775800512,
+    "releaseNotes": "unavailable",
+    "metadata": {
+        "description": "KPIoptional94 \uc704\uc82f \ud14c\uc2a4\ud2b81",
+        "pages": [
+            "Dashboard"
+        ],
+        "certified": "No",
+        "publisher": "optional94",
+        "compatibility": [
+            "7.6.2"
+        ],
+        "category": [
+            "Asset Management"
+        ]
+    },
+    "development": true
+}

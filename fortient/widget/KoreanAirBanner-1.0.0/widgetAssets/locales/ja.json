@@ -1,0 +1,10 @@
+{
+  "KoreanAirBanner": {
+    "BTN_CLOSE": "閉じる",
+    "BTN_SAVE": "保存",
+    "TXT_NO_RECS_FOUND": "データがありません。",
+    "LABEL_REFRESH": "更新",
+    "LABEL_ME": "自分",
+    "LABEL_ALL": "すべて"
+  }
+}

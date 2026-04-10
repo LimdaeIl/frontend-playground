@@ -1,0 +1,26 @@
+{
+    "name": "eRopKeimyungBanner",
+    "title": "Keimyung University Banner",
+    "subTitle": "\uacc4\uba85\ub300\ud559\uad50 \ube0c\ub79c\ub529 \ubc30\ub108 \uc704\uc82f (\uac00\ub85c\ud615, \uc560\ub2c8\uba54\uc774\uc158)",
+    "version": "1.0.0",
+    "published_date": 1743292800,
+    "releaseNotes": "available",
+    "metadata": {
+        "description": "\uacc4\uba85\ub300\ud559\uad50 \ub85c\uace0\uc640 \ube0c\ub79c\ub4dc \uceec\ub7ec(\ub525 \ub124\uc774\ube44 #1B3A7C + \uc2a4\uce7c\ub81b \ub808\ub4dc #C8102E)\ub97c \ud65c\uc6a9\ud55c \uac00\ub85c\ud615 \uc560\ub2c8\uba54\uc774\uc158 \ube0c\ub79c\ub529 \ubc30\ub108 \uc704\uc82f.",
+        "pages": [
+            "Dashboard",
+            "View Panel",
+            "Reports",
+            "Listing"
+        ],
+        "certified": "No",
+        "publisher": "Korea SE Team",
+        "snapshots": [],
+        "help_online": "",
+        "compatibility": [
+            "7.6.1",
+            "7.6.5"
+        ]
+    },
+    "development": false
+}

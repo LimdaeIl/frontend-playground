@@ -1,0 +1,10 @@
+{
+  "KoreanAirBanner": {
+    "BTN_CLOSE": "Close",
+    "BTN_SAVE": "Save",
+    "TXT_NO_RECS_FOUND": "No records found.",
+    "LABEL_REFRESH": "Refresh",
+    "LABEL_ME": "Me",
+    "LABEL_ALL": "All"
+  }
+}

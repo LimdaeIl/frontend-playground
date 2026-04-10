@@ -1,0 +1,13 @@
+{
+  "eRopKeimyungBanner": {
+    "BTN_CLOSE": "Close",
+    "BTN_SAVE": "Save",
+    "LBL_TITLE": "Widget Title",
+    "LBL_MAIN_TITLE": "Banner Main Title",
+    "LBL_TICKER": "Scroll Ticker Message",
+    "PH_TICKER": "Custom ticker message (leave blank for default)",
+    "TXT_LABEL_SOC": "SOC Active",
+    "TXT_LABEL_POWERED": "Powered by FortiSOAR",
+    "LABEL_REFRESH": "Refresh"
+  }
+}

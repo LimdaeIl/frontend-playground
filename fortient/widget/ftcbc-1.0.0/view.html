@@ -1,0 +1,552 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/ftcbc-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<style type="text/css">
+
+/* ══════════════════════════════════════════════════
+   KEYFRAMES
+══════════════════════════════════════════════════ */
+@keyframes ftcbc-gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes ftcbc-scan {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateX(400%); opacity: 0; }
+}
+@keyframes ftcbc-logo-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-4px) rotate(0.8deg); }
+}
+@keyframes ftcbc-logo-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(238,49,36,0.55)) drop-shadow(0 0 18px rgba(238,49,36,0.25)); }
+  50%       { filter: drop-shadow(0 0 16px rgba(238,49,36,0.85)) drop-shadow(0 0 32px rgba(242,101,34,0.4)); }
+}
+@keyframes ftcbc-text-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes ftcbc-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ftcbc-pulse-dot {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 0.85; transform: scale(1.2); }
+}
+@keyframes ftcbc-accent-line {
+  0%   { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes ftcbc-badge-in {
+  from { opacity: 0; transform: translateX(14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes ftcbc-hex-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes ftcbc-hex-ring-spin-rev {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+@keyframes ftcbc-live-pulse {
+  0%, 100% { box-shadow: 0 0 4px #34d399, 0 0 8px rgba(52,211,153,0.4); opacity: 0.8; }
+  50%       { box-shadow: 0 0 8px #34d399, 0 0 18px rgba(52,211,153,0.7); opacity: 1; }
+}
+@keyframes ftcbc-badge-dot-pulse {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1; }
+}
+
+/* ══════════════════════════════════════════════════
+   WRAPPER
+══════════════════════════════════════════════════ */
+.ftcbc-wrap {
+  position: relative;
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+/* ══════════════════════════════════════════════════
+   BANNER BODY
+══════════════════════════════════════════════════ */
+.ftcbc-banner {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: 128px;
+  background: linear-gradient(125deg,
+    #0C0404 0%,
+    #1C0808 20%,
+    #2A0D0D 40%,
+    #200A0A 60%,
+    #1C0808 80%,
+    #0C0404 100%);
+  background-size: 300% 300%;
+  animation: ftcbc-gradient-shift 14s ease infinite;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+/* 배경 도트 패턴 */
+.ftcbc-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(238,49,36,0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 상단 하이라이트 라인 */
+.ftcbc-banner::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(238,49,36,0.5) 15%,
+    rgba(255,140,80,0.9) 40%,
+    rgba(242,101,34,0.95) 50%,
+    rgba(255,140,80,0.9) 60%,
+    rgba(238,49,36,0.5) 85%,
+    transparent 100%);
+  z-index: 2;
+}
+
+/* 스캔라인 빔 (warm red) */
+.ftcbc-scan-beam {
+  position: absolute;
+  top: 0; left: 0;
+  width: 22%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(238, 80, 50, 0.06) 40%,
+    rgba(255, 100, 55, 0.10) 50%,
+    rgba(238, 80, 50, 0.06) 60%,
+    transparent 100%);
+  animation: ftcbc-scan 9s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════
+   COLLAPSE BUTTON
+══════════════════════════════════════════════════ */
+.ftcbc-collapse-btn {
+  position: absolute;
+  top: 8px; right: 10px;
+  z-index: 10;
+  background: rgba(238,49,36,0.08);
+  border: 1px solid rgba(238,49,36,0.2);
+  border-radius: 50%;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+  color: rgba(255,150,120,0.5);
+  font-size: 10px;
+}
+.ftcbc-collapse-btn:hover { background: rgba(238,49,36,0.18); color: #ffb090; }
+
+/* ══════════════════════════════════════════════════
+   CONTENT LAYOUT
+══════════════════════════════════════════════════ */
+.ftcbc-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px 20px 16px 20px;
+  gap: 0;
+}
+
+/* ── LOGO SECTION ──────────────────────────────── */
+.ftcbc-logo-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 24px;
+  border-right: 1px solid rgba(238,49,36,0.25);
+  margin-right: 24px;
+}
+.ftcbc-shield-wrap {
+  position: relative;
+  width: 76px; height: 76px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ftcbc-shield-ring {
+  position: absolute;
+  width: 76px; height: 76px;
+  border: 1px dashed rgba(238,49,36,0.22);
+  border-radius: 50%;
+  animation: ftcbc-hex-ring-spin 25s linear infinite;
+}
+.ftcbc-shield-ring-inner {
+  position: absolute;
+  width: 60px; height: 60px;
+  border: 1px dotted rgba(242,101,34,0.15);
+  border-radius: 50%;
+  animation: ftcbc-hex-ring-spin-rev 18s linear infinite;
+}
+.ftcbc-logo {
+  width: 76px; height: 56px;
+  animation: ftcbc-logo-float 5s ease-in-out infinite,
+             ftcbc-logo-glow  3s ease-in-out infinite;
+}
+.ftcbc-logo-label {
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  color: rgba(255,130,90,0.55);
+  text-transform: uppercase;
+  margin-top: 5px;
+  text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ── BRAND SECTION ─────────────────────────────── */
+.ftcbc-brand-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: ftcbc-text-in 0.7s ease-out forwards;
+}
+.ftcbc-org-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-shadow: 0 2px 18px rgba(238,49,36,0.45);
+}
+.ftcbc-center-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,160,100,0.88);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.ftcbc-divider {
+  width: 44px;
+  height: 2px;
+  background: linear-gradient(90deg, #EE3124, rgba(242,101,34,0.2));
+  border-radius: 2px;
+  margin: 8px 0;
+}
+.ftcbc-tagline {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: rgba(255,190,150,0.65);
+  letter-spacing: 0.05em;
+  font-style: italic;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ── CBC SEAL SECTION ──────────────────────────── */
+.ftcbc-cbc-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 26px;
+  border-left: 1px solid rgba(238,49,36,0.18);
+  border-right: 1px solid rgba(238,49,36,0.18);
+  margin: 0 4px;
+  gap: 6px;
+}
+.ftcbc-hex-container {
+  position: relative;
+  width: 64px; height: 72px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ftcbc-hex-outer-ring {
+  position: absolute;
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  border: 1px dashed rgba(238,49,36,0.2);
+  animation: ftcbc-hex-ring-spin 20s linear infinite;
+}
+.ftcbc-hex-svg {
+  position: relative; z-index: 1;
+}
+.ftcbc-cbc-year {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: rgba(255,140,90,0.55);
+  text-align: center;
+}
+.ftcbc-active-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(52,211,153,0.9);
+}
+.ftcbc-active-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  animation: ftcbc-live-pulse 2s ease-in-out infinite;
+}
+
+/* ── PRODUCTS SECTION ──────────────────────────── */
+.ftcbc-products-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 24px;
+  border-left: 1px solid rgba(238,49,36,0.22);
+  margin-left: 8px;
+  gap: 5px;
+  animation: ftcbc-fade-in 0.9s ease-out forwards;
+}
+
+/* 제품 뱃지 공통 */
+.ftcbc-prod-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 11px 3px 8px;
+  border-radius: 20px;
+  border: 1px solid;
+  background: rgba(0,0,0,0.25);
+  animation: ftcbc-badge-in 0.5s ease-out both;
+  cursor: default;
+  transition: background 0.2s;
+}
+.ftcbc-prod-badge:hover { background: rgba(0,0,0,0.4); }
+.ftcbc-prod-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: ftcbc-badge-dot-pulse 2.5s ease-in-out infinite;
+}
+.ftcbc-prod-text {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* SecOps — Fortinet Red */
+.ftcbc-b-secops { border-color: rgba(238,49,36,0.45); }
+.ftcbc-b-secops .ftcbc-prod-dot {
+  background: #EE3124;
+  box-shadow: 0 0 6px rgba(238,49,36,0.9), 0 0 12px rgba(238,49,36,0.4);
+}
+.ftcbc-b-secops .ftcbc-prod-text { color: rgba(255,140,110,0.92); }
+
+/* FortiSOAR — Orange */
+.ftcbc-b-soar { border-color: rgba(242,101,34,0.45); }
+.ftcbc-b-soar .ftcbc-prod-dot {
+  background: #F26522;
+  box-shadow: 0 0 6px rgba(242,101,34,0.9), 0 0 12px rgba(242,101,34,0.4);
+}
+.ftcbc-b-soar .ftcbc-prod-text { color: rgba(255,175,110,0.92); }
+
+/* LIVE DEMO */
+.ftcbc-demo-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 11px 3px 8px;
+  border-radius: 20px;
+  border: 1px solid rgba(52,211,153,0.35);
+  background: rgba(52,211,153,0.06);
+  margin-top: 1px;
+  animation: ftcbc-badge-in 0.5s ease-out both;
+}
+.ftcbc-demo-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 7px rgba(52,211,153,0.9), 0 0 14px rgba(52,211,153,0.4);
+  animation: ftcbc-live-pulse 1.8s ease-in-out infinite;
+}
+.ftcbc-demo-badge span {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: rgba(52,211,153,0.9);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ══════════════════════════════════════════════════
+   BOTTOM ACCENT BAR
+══════════════════════════════════════════════════ */
+.ftcbc-accent-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    #1C0808 0%,
+    #EE3124 20%,
+    #F26522 40%,
+    #FF8040 50%,
+    #F26522 60%,
+    #EE3124 80%,
+    #1C0808 100%);
+  background-size: 200% 100%;
+  animation: ftcbc-accent-line 4s linear infinite;
+  z-index: 4;
+}
+
+/* ══════════════════════════════════════════════════
+   COLLAPSED STATE
+══════════════════════════════════════════════════ */
+.ftcbc-collapsed-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: linear-gradient(90deg, #1A0808, #280D0D, #1A0808);
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(238,49,36,0.15);
+}
+.ftcbc-collapsed-bar .ftcbc-logo-sm {
+  width: 24px; height: 18px;
+}
+.ftcbc-collapsed-bar span {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,160,110,0.8);
+  letter-spacing: 0.1em;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+</style>
+
+<div class="widget widget-container ftcbc-wrap">
+
+  <!-- ── 펼친 상태 ── -->
+  <div class="ftcbc-banner" data-ng-hide="collapsed">
+
+    <!-- 장식 요소 -->
+    <div class="ftcbc-scan-beam"></div>
+    <div class="ftcbc-accent-bar"></div>
+
+    <!-- 접기 버튼 -->
+    <button class="ftcbc-collapse-btn" data-ng-click="collapsed = true" title="Collapse">
+      <span class="fa fa-caret-up"></span>
+    </button>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="ftcbc-content">
+
+      <!-- ① Fortinet 쉴드 로고 -->
+      <div class="ftcbc-logo-section" data-ng-if="config.showLogo !== false">
+        <div class="ftcbc-shield-wrap">
+          <div class="ftcbc-shield-ring"></div>
+          <div class="ftcbc-shield-ring-inner"></div>
+          <svg class="ftcbc-logo" viewBox="43 43 97 74" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#DA291C" d="M129.7,73.1v13.8h0h-21.5V73.1l0,0H129.7L129.7,73.1L129.7,73.1z M80.8,106.6L80.8,106.6l21.5,0v0V92.8H80.8
+              V106.6z M129.7,64.9c0-6.4-5.2-11.6-11.6-11.6l-9.9,0v13.8h21.5V64.9z M80.8,53.3v13.8l0,0h21.5l0,0V53.3v0L80.8,53.3L80.8,53.3z
+              M53.3,73.1L53.3,73.1v13.8l0,0h21.5V73.1l0,0H53.3L53.3,73.1z M108.2,106.6l9.9,0c6.4,0,11.6-5.2,11.6-11.6v-2.2h-21.5V106.6z
+              M53.3,95c0,6.4,5.2,11.6,11.6,11.6l9.9,0V92.8H53.3V95z M53.3,64.9v2.2h21.5V53.3l-9.9,0C58.5,53.3,53.3,58.5,53.3,64.9z"/>
+          </svg>
+        </div>
+        <div class="ftcbc-logo-label">Fortinet</div>
+      </div>
+
+      <!-- ② 브랜드 텍스트 -->
+      <div class="ftcbc-brand-section">
+        <div class="ftcbc-org-name">{{ config.orgName || 'Fortinet Korea' }}</div>
+        <div class="ftcbc-center-name">{{ config.centerName || 'Customer Briefing Center' }}</div>
+        <div class="ftcbc-divider"></div>
+        <div class="ftcbc-tagline">{{ config.tagline || 'Cybersecurity Excellence' }}</div>
+      </div>
+
+      <!-- ③ CBC 씰 배지 -->
+      <div class="ftcbc-cbc-section">
+        <div class="ftcbc-hex-container">
+          <div class="ftcbc-hex-outer-ring"></div>
+          <svg class="ftcbc-hex-svg" width="64" height="72" viewBox="0 0 64 72" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer hex glow -->
+            <polygon points="32,2 62,18 62,54 32,70 2,54 2,18"
+                     fill="rgba(238,49,36,0.06)"
+                     stroke="rgba(238,49,36,0.15)" stroke-width="2"/>
+            <!-- Inner hex -->
+            <polygon points="32,8 56,22 56,50 32,64 8,50 8,22"
+                     fill="rgba(238,49,36,0.12)"
+                     stroke="rgba(238,49,36,0.5)" stroke-width="1.2"/>
+            <!-- Center glow spot -->
+            <circle cx="32" cy="36" r="14" fill="rgba(238,49,36,0.08)"/>
+            <!-- CBC text -->
+            <text x="32" y="33" text-anchor="middle" dominant-baseline="middle"
+                  font-size="13" font-weight="900"
+                  font-family="'Segoe UI', Arial, sans-serif"
+                  fill="#FF8060" letter-spacing="1.5">CBC</text>
+            <!-- KOREA text -->
+            <text x="32" y="50" text-anchor="middle" dominant-baseline="middle"
+                  font-size="6.5" font-weight="700"
+                  font-family="'Segoe UI', Arial, sans-serif"
+                  fill="rgba(255,160,110,0.55)" letter-spacing="3">KOREA</text>
+          </svg>
+        </div>
+        <div class="ftcbc-cbc-year">{{ currentYear }}</div>
+        <div class="ftcbc-active-badge">
+          <div class="ftcbc-active-dot"></div>
+          <span>ACTIVE</span>
+        </div>
+      </div>
+
+      <!-- ④ 제품 뱃지 (시계 자리) -->
+      <div class="ftcbc-products-section">
+        <div class="ftcbc-prod-badge ftcbc-b-secops" style="animation-delay:0.10s">
+          <div class="ftcbc-prod-dot"></div>
+          <span class="ftcbc-prod-text">Security Operations</span>
+        </div>
+        <div class="ftcbc-prod-badge ftcbc-b-soar" style="animation-delay:0.22s">
+          <div class="ftcbc-prod-dot"></div>
+          <span class="ftcbc-prod-text">FortiSOAR</span>
+        </div>
+        <div class="ftcbc-demo-badge" style="animation-delay:0.34s">
+          <div class="ftcbc-demo-dot"></div>
+          <span>LIVE DEMO</span>
+        </div>
+      </div>
+
+    </div><!-- /ftcbc-content -->
+  </div><!-- /ftcbc-banner -->
+
+  <!-- ── 접힌 상태 ── -->
+  <div class="ftcbc-collapsed-bar" data-ng-show="collapsed" data-ng-click="collapsed = false">
+    <svg class="ftcbc-logo-sm" viewBox="43 43 97 74" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#DA291C" d="M129.7,73.1v13.8h0h-21.5V73.1l0,0H129.7L129.7,73.1L129.7,73.1z M80.8,106.6L80.8,106.6l21.5,0v0V92.8H80.8
+        V106.6z M129.7,64.9c0-6.4-5.2-11.6-11.6-11.6l-9.9,0v13.8h21.5V64.9z M80.8,53.3v13.8l0,0h21.5l0,0V53.3v0L80.8,53.3L80.8,53.3z
+        M53.3,73.1L53.3,73.1v13.8l0,0h21.5V73.1l0,0H53.3L53.3,73.1z M108.2,106.6l9.9,0c6.4,0,11.6-5.2,11.6-11.6v-2.2h-21.5V106.6z
+        M53.3,95c0,6.4,5.2,11.6,11.6,11.6l9.9,0V92.8H53.3V95z M53.3,64.9v2.2h21.5V53.3l-9.9,0C58.5,53.3,53.3,58.5,53.3,64.9z"/>
+    </svg>
+    <span>{{ config.orgName || 'Fortinet Korea' }} · {{ config.centerName || 'CBC' }}</span>
+    <span class="fa fa-caret-down" style="color:rgba(255,130,90,0.5); margin-left:auto;"></span>
+  </div>
+
+</div>

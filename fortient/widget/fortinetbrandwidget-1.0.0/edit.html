@@ -1,0 +1,48 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/fortinetbrandwidget-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<form data-ng-submit="save()" class="noMargin" name="editForm"
+  data-ng-class="{'state-wait': processing}" novalidate>
+
+  <div class="modal-header">
+    <h3 class="modal-title col-md-9">Fortinet Brand Banner Settings</h3>
+    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal"
+      aria-label="Close" id="close-edit-widget-form-btn">
+      <div aria-hidden="true" class="version-button">+</div>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <!-- Title -->
+    <div class="form-group"
+      data-ng-class="{ 'has-error': editForm.title.$invalid && editForm.title.$touched }">
+      <label for="wgt-title" class="control-label">Title<span class="text-danger">*</span></label>
+      <input id="wgt-title" name="title" type="text" class="form-control"
+        data-ng-model="config.title" required placeholder="Widget title">
+      <div data-cs-messages="editForm.title"></div>
+    </div>
+
+    <div class="alert alert-info" style="margin-top:16px;font-size:12px;">
+      <strong>Note:</strong> This is a display-only brand banner widget. Place the banner in a
+      full-width row on your dashboard for best results. The live clock and animations run
+      automatically — no data source configuration required.
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary">
+      <i class="icon icon-check margin-right-sm"></i>{{ viewWidgetVars.BTN_SAVE || 'Save' }}
+    </button>
+    <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default"
+      data-ng-click="cancel()">
+      <i class="icon icon-close margin-right-sm"></i>{{ viewWidgetVars.BTN_CLOSE || 'Close' }}
+    </button>
+  </div>
+
+</form>

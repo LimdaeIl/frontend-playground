@@ -1,0 +1,13 @@
+{
+  "eRopKeimyungBanner": {
+    "BTN_CLOSE": "닫기",
+    "BTN_SAVE": "저장",
+    "LBL_TITLE": "위젯 제목",
+    "LBL_MAIN_TITLE": "배너 메인 타이틀",
+    "LBL_TICKER": "스크롤 티커 메시지",
+    "PH_TICKER": "커스텀 티커 메시지 (공백 시 기본값 사용)",
+    "TXT_LABEL_SOC": "SOC 운영 중",
+    "TXT_LABEL_POWERED": "Powered by FortiSOAR",
+    "LABEL_REFRESH": "새로고침"
+  }
+}

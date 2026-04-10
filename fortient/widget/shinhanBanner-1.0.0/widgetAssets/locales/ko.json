@@ -1,0 +1,12 @@
+{
+  "shinhanBanner": {
+    "BTN_CLOSE": "닫기",
+    "BTN_SAVE": "저장",
+    "TXT_NO_RECS_FOUND": "데이터가 없습니다.",
+    "LABEL_REFRESH": "새로고침",
+    "GROUP_NAME": "신한금융그룹",
+    "TAGLINE": "금융으로 세상을 이롭게",
+    "EST_YEAR": "Since 1982",
+    "GLOBAL_TEXT": "글로벌 금융그룹"
+  }
+}

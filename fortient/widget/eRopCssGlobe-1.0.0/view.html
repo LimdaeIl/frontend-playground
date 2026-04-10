@@ -1,0 +1,476 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/eRopCssGlobe-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<style type="text/css">
+/* ══════════════════════════════════════════════
+   eRopCssGlobe — Pure CSS Rotating Globe
+   ══════════════════════════════════════════════ */
+
+.erg-wrap {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+/* Star field background */
+.erg-stars {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image:
+    radial-gradient(1px 1px at  8% 12%, rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(1px 1px at 22% 72%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px 1px at 38%  6%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 85%, rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 71% 30%, rgba(255,255,255,0.50) 0%, transparent 100%),
+    radial-gradient(1px 1px at 84% 58%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(1px 1px at 93% 18%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(1px 1px at 14% 48%, rgba(255,255,255,0.30) 0%, transparent 100%),
+    radial-gradient(1px 1px at 62% 52%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 77% 90%, rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(2px 2px at 46% 23%, rgba(255,255,255,0.20) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 75%, rgba(255,255,255,0.30) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Center wrapper for the globe + atmosphere */
+.erg-globe-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0 20px;
+  position: relative;
+}
+
+/* ── Atmospheric glow ─────────────────────────── */
+.erg-atmosphere {
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: erg-atm-pulse 5s ease-in-out infinite;
+}
+
+@keyframes erg-atm-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 25px 8px  rgba(79, 195, 247, 0.10),
+      0 0 55px 22px rgba(79, 195, 247, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 35px 14px rgba(79, 195, 247, 0.16),
+      0 0 75px 35px rgba(79, 195, 247, 0.08);
+  }
+}
+
+/* ── Globe sphere (clips the scrolling map) ────── */
+.erg-globe {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  /* Deep ocean gradient */
+  background: linear-gradient(150deg, #1565C0 0%, #0D47A1 45%, #09296E 100%);
+  box-shadow:
+    inset -40px -22px 70px rgba(0, 0, 0, 0.78),
+    inset  10px  12px 30px rgba(255, 255, 255, 0.04),
+    0 0 0 2px rgba(79, 195, 247, 0.28),
+    0 14px 55px rgba(13, 71, 161, 0.55);
+}
+
+/* ── Scrolling map track (200% wide = 440 px) ──── */
+/*    left  0-219 px  → copy 1                      */
+/*    left 220-439 px → copy 2 (seamless loop)      */
+.erg-track {
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%; height: 100%;
+  animation: erg-globe-spin linear infinite;
+  animation-duration: inherit;   /* inherits from parent; overridden by ng-style */
+}
+
+@keyframes erg-globe-spin {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Land base style ──────────────────────────── */
+.erg-l { position: absolute; }
+
+/* ── Latitude grid lines (overlay, static) ─────── */
+.erg-lats {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent              0,
+    transparent              calc(220px / 6 - 1px),
+    rgba(100,181,246,0.07)   calc(220px / 6 - 1px),
+    rgba(100,181,246,0.07)   calc(220px / 6)
+  );
+  pointer-events: none;
+}
+
+/* ── 3-D sphere shading (top overlay) ─────────── */
+.erg-shade {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background:
+    /* highlight top-left */
+    radial-gradient(circle at 33% 28%,
+      rgba(255,255,255,0.22)  0%,
+      rgba(255,255,255,0.06) 22%,
+      transparent             48%),
+    /* shadow bottom-right */
+    radial-gradient(circle at 74% 71%,
+      rgba(0,0,20,0.58)  0%,
+      rgba(0,0,10,0.20) 35%,
+      transparent        62%),
+    /* rim darkening */
+    radial-gradient(circle at 50% 50%,
+      transparent        30%,
+      rgba(0,0,0,0.12)  75%,
+      rgba(0,0,0,0.38) 100%);
+  pointer-events: none;
+}
+
+/* ── Globe label ──────────────────────────────── */
+.erg-label {
+  margin-top: 18px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.30);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+}
+</style>
+
+<div class="widget widget-container erg-wrap">
+
+  <!-- ── Header ──────────────────────────────────── -->
+  <div class="display-flex-space-between margin-chart">
+    <div class="padding-right-0 padding-left-0"
+      data-ng-class="(page==='dashboard'||page==='reporting') ? 'widget-dashboard-title-width' : 'widget-title-width'">
+      <h5 class="widget-title" title="{{ config.title }}">{{ config.title }}</h5>
+    </div>
+    <div class="padding-right-0 padding-left-0"
+      data-ng-class="(page==='dashboard'||page==='reporting') ? 'widget-dashboard-actions-width' : 'widget-actions-width'">
+      <span class="fa btn widget-action-icon btn-sm pull-right"
+        data-ng-click="collapsed = !collapsed"
+        data-ng-class="{'fa-caret-up': !collapsed, 'fa-caret-down': collapsed}"></span>
+    </div>
+  </div>
+
+  <!-- ── Body ───────────────────────────────────── -->
+  <div data-ng-hide="collapsed">
+
+    <!-- Star field -->
+    <div class="erg-stars"></div>
+
+    <div class="erg-globe-area">
+
+      <!-- Atmospheric glow ring -->
+      <div class="erg-atmosphere"></div>
+
+      <!-- Globe sphere (overflow:hidden clips the scrolling map) -->
+      <!--
+        animation-duration is bound to config.spinSpeed (seconds).
+        The CSS-only track and its children inherit this duration.
+        Higher value = slower spin.
+      -->
+      <div class="erg-globe"
+           data-ng-style="{'animation-duration': (config.spinSpeed || 28) + 's'}">
+
+        <!-- Scrolling map track — contains meridian lines + land masses -->
+        <div class="erg-track">
+
+          <!--
+            ══════════════════════════════════════════
+            MERIDIAN LINES
+            repeating-linear-gradient inside the track
+            so they scroll with the continents
+            (440 px total / 12 sectors = 30° per line)
+            ══════════════════════════════════════════
+          -->
+          <div style="position:absolute;top:0;left:0;width:100%;height:100%;
+            background:repeating-linear-gradient(to right,
+              transparent 0,
+              transparent calc(440px / 12 - 1px),
+              rgba(100,181,246,0.06) calc(440px / 12 - 1px),
+              rgba(100,181,246,0.06) calc(440px / 12));
+            pointer-events:none"></div>
+
+          <!--
+            ══════════════════════════════════════════
+            LAND MASSES — COPY 1  (left: 0 – 219 px)
+            Coordinate mapping (220 px = 360° / 180°):
+              x = (lon + 180) / 360 * 220
+              y = (90  - lat) / 180 * 220
+            ══════════════════════════════════════════
+          -->
+
+          <!-- Arctic ice cap -->
+          <div class="erg-l" style="width:220px;height:14px;top:0;left:0;
+            background:rgba(220,242,255,0.88);border-radius:0 0 45% 45% / 0 0 90% 90%"></div>
+
+          <!-- Alaska -->
+          <div class="erg-l" style="width:20px;height:19px;top:19px;left:3px;
+            background:#4CAF50;border-radius:55% 45% 40% 60%"></div>
+
+          <!-- North America — west (Rockies) -->
+          <div class="erg-l" style="width:18px;height:55px;top:20px;left:21px;
+            background:#388E3C;border-radius:50% 30% 30% 50%"></div>
+
+          <!-- North America — main body -->
+          <div class="erg-l" style="width:44px;height:70px;top:20px;left:27px;
+            background:#2E7D32;border-radius:45% 55% 55% 45% / 35% 45% 65% 55%"></div>
+
+          <!-- Mexico / Central America -->
+          <div class="erg-l" style="width:20px;height:26px;top:78px;left:51px;
+            background:#388E3C;border-radius:35% 65% 70% 30%"></div>
+
+          <!-- Greenland (ice-covered, blueish white) -->
+          <div class="erg-l" style="width:27px;height:34px;top:3px;left:71px;
+            background:#B2DFDB;border-radius:50%;opacity:0.92"></div>
+
+          <!-- Iceland -->
+          <div class="erg-l" style="width:7px;height:5px;top:23px;left:91px;
+            background:#4CAF50;border-radius:50%"></div>
+
+          <!-- South America — north (wider top) -->
+          <div class="erg-l" style="width:40px;height:23px;top:90px;left:52px;
+            background:#2E7D32;border-radius:45% 35% 30% 55%"></div>
+
+          <!-- South America — main -->
+          <div class="erg-l" style="width:30px;height:80px;top:104px;left:57px;
+            background:#1B5E20;border-radius:40% 60% 50% 50% / 20% 20% 70% 80%"></div>
+
+          <!-- UK + Ireland -->
+          <div class="erg-l" style="width:9px;height:14px;top:18px;left:99px;
+            background:#388E3C;border-radius:45%"></div>
+
+          <!-- Iberian Peninsula -->
+          <div class="erg-l" style="width:14px;height:16px;top:38px;left:99px;
+            background:#388E3C;border-radius:45% 55% 65% 35%"></div>
+
+          <!-- Europe — main (France + Germany + Italy) -->
+          <div class="erg-l" style="width:30px;height:46px;top:19px;left:104px;
+            background:#388E3C;border-radius:45% 55% 55% 45% / 35% 45% 65% 55%"></div>
+
+          <!-- Scandinavia -->
+          <div class="erg-l" style="width:14px;height:38px;top:10px;left:115px;
+            background:#2E7D32;border-radius:40% 60% 50% 50% / 15% 15% 85% 85%"></div>
+
+          <!-- Africa — main -->
+          <div class="erg-l" style="width:48px;height:94px;top:59px;left:96px;
+            background:#2E7D32;border-radius:30% 70% 55% 45% / 20% 20% 65% 80%"></div>
+
+          <!-- Sahara desert (lighter brown overlay) -->
+          <div class="erg-l" style="width:33px;height:27px;top:61px;left:100px;
+            background:#A1887F;border-radius:40%;opacity:0.72"></div>
+
+          <!-- Southern Africa (Kalahari) -->
+          <div class="erg-l" style="width:16px;height:14px;top:132px;left:112px;
+            background:#8D6E63;border-radius:40%;opacity:0.55"></div>
+
+          <!-- Madagascar -->
+          <div class="erg-l" style="width:6px;height:15px;top:121px;left:140px;
+            background:#388E3C;border-radius:40% 60% 55% 45%"></div>
+
+          <!-- Arabia -->
+          <div class="erg-l" style="width:26px;height:42px;top:62px;left:139px;
+            background:#A1887F;border-radius:40% 60% 65% 35% / 20% 20% 80% 80%"></div>
+
+          <!-- Asia — main (Siberia + China) -->
+          <div class="erg-l" style="width:95px;height:82px;top:8px;left:121px;
+            background:#388E3C;border-radius:55% 45% 38% 62% / 45% 55% 55% 45%"></div>
+
+          <!-- Central Asia (Gobi / steppe, drier) -->
+          <div class="erg-l" style="width:42px;height:34px;top:36px;left:139px;
+            background:#8D6E63;border-radius:40%;opacity:0.48"></div>
+
+          <!-- Indian subcontinent -->
+          <div class="erg-l" style="width:19px;height:37px;top:70px;left:163px;
+            background:#2E7D32;border-radius:45% 55% 60% 40% / 15% 15% 85% 85%"></div>
+
+          <!-- Sri Lanka (tiny) -->
+          <div class="erg-l" style="width:4px;height:4px;top:104px;left:172px;
+            background:#388E3C;border-radius:50%"></div>
+
+          <!-- SE Asia — Indochina + Malay -->
+          <div class="erg-l" style="width:22px;height:30px;top:72px;left:178px;
+            background:#2E7D32;border-radius:45%"></div>
+
+          <!-- Borneo / Sumatra (islands) -->
+          <div class="erg-l" style="width:14px;height:10px;top:98px;left:183px;
+            background:#1B5E20;border-radius:40%"></div>
+
+          <!-- Japan -->
+          <div class="erg-l" style="width:7px;height:20px;top:49px;left:189px;
+            background:#388E3C;border-radius:40% 60% 55% 45%"></div>
+
+          <!-- Australia — interior (arid red) -->
+          <div class="erg-l" style="width:30px;height:28px;top:128px;left:176px;
+            background:#8D6E63;border-radius:45%"></div>
+
+          <!-- Australia — east coast (green) -->
+          <div class="erg-l" style="width:10px;height:28px;top:128px;left:198px;
+            background:#388E3C;border-radius:30% 70% 55% 45%"></div>
+
+          <!-- New Zealand -->
+          <div class="erg-l" style="width:5px;height:15px;top:142px;left:211px;
+            background:#4CAF50;border-radius:40%"></div>
+
+          <!-- Antarctica -->
+          <div class="erg-l" style="width:220px;height:22px;top:200px;left:0;
+            background:rgba(220,242,255,0.92);border-radius:0"></div>
+
+          <!--
+            ══════════════════════════════════════════
+            LAND MASSES — COPY 2  (left: +220 px)
+            Identical to copy 1 shifted right by 220 px
+            ══════════════════════════════════════════
+          -->
+
+          <!-- Arctic ice cap -->
+          <div class="erg-l" style="width:220px;height:14px;top:0;left:220px;
+            background:rgba(220,242,255,0.88);border-radius:0 0 45% 45% / 0 0 90% 90%"></div>
+
+          <!-- Alaska -->
+          <div class="erg-l" style="width:20px;height:19px;top:19px;left:223px;
+            background:#4CAF50;border-radius:55% 45% 40% 60%"></div>
+
+          <!-- North America — west (Rockies) -->
+          <div class="erg-l" style="width:18px;height:55px;top:20px;left:241px;
+            background:#388E3C;border-radius:50% 30% 30% 50%"></div>
+
+          <!-- North America — main body -->
+          <div class="erg-l" style="width:44px;height:70px;top:20px;left:247px;
+            background:#2E7D32;border-radius:45% 55% 55% 45% / 35% 45% 65% 55%"></div>
+
+          <!-- Mexico / Central America -->
+          <div class="erg-l" style="width:20px;height:26px;top:78px;left:271px;
+            background:#388E3C;border-radius:35% 65% 70% 30%"></div>
+
+          <!-- Greenland -->
+          <div class="erg-l" style="width:27px;height:34px;top:3px;left:291px;
+            background:#B2DFDB;border-radius:50%;opacity:0.92"></div>
+
+          <!-- Iceland -->
+          <div class="erg-l" style="width:7px;height:5px;top:23px;left:311px;
+            background:#4CAF50;border-radius:50%"></div>
+
+          <!-- South America — north -->
+          <div class="erg-l" style="width:40px;height:23px;top:90px;left:272px;
+            background:#2E7D32;border-radius:45% 35% 30% 55%"></div>
+
+          <!-- South America — main -->
+          <div class="erg-l" style="width:30px;height:80px;top:104px;left:277px;
+            background:#1B5E20;border-radius:40% 60% 50% 50% / 20% 20% 70% 80%"></div>
+
+          <!-- UK + Ireland -->
+          <div class="erg-l" style="width:9px;height:14px;top:18px;left:319px;
+            background:#388E3C;border-radius:45%"></div>
+
+          <!-- Iberian Peninsula -->
+          <div class="erg-l" style="width:14px;height:16px;top:38px;left:319px;
+            background:#388E3C;border-radius:45% 55% 65% 35%"></div>
+
+          <!-- Europe — main -->
+          <div class="erg-l" style="width:30px;height:46px;top:19px;left:324px;
+            background:#388E3C;border-radius:45% 55% 55% 45% / 35% 45% 65% 55%"></div>
+
+          <!-- Scandinavia -->
+          <div class="erg-l" style="width:14px;height:38px;top:10px;left:335px;
+            background:#2E7D32;border-radius:40% 60% 50% 50% / 15% 15% 85% 85%"></div>
+
+          <!-- Africa — main -->
+          <div class="erg-l" style="width:48px;height:94px;top:59px;left:316px;
+            background:#2E7D32;border-radius:30% 70% 55% 45% / 20% 20% 65% 80%"></div>
+
+          <!-- Sahara -->
+          <div class="erg-l" style="width:33px;height:27px;top:61px;left:320px;
+            background:#A1887F;border-radius:40%;opacity:0.72"></div>
+
+          <!-- Southern Africa -->
+          <div class="erg-l" style="width:16px;height:14px;top:132px;left:332px;
+            background:#8D6E63;border-radius:40%;opacity:0.55"></div>
+
+          <!-- Madagascar -->
+          <div class="erg-l" style="width:6px;height:15px;top:121px;left:360px;
+            background:#388E3C;border-radius:40% 60% 55% 45%"></div>
+
+          <!-- Arabia -->
+          <div class="erg-l" style="width:26px;height:42px;top:62px;left:359px;
+            background:#A1887F;border-radius:40% 60% 65% 35% / 20% 20% 80% 80%"></div>
+
+          <!-- Asia — main -->
+          <div class="erg-l" style="width:95px;height:82px;top:8px;left:341px;
+            background:#388E3C;border-radius:55% 45% 38% 62% / 45% 55% 55% 45%"></div>
+
+          <!-- Central Asia (Gobi) -->
+          <div class="erg-l" style="width:42px;height:34px;top:36px;left:359px;
+            background:#8D6E63;border-radius:40%;opacity:0.48"></div>
+
+          <!-- Indian subcontinent -->
+          <div class="erg-l" style="width:19px;height:37px;top:70px;left:383px;
+            background:#2E7D32;border-radius:45% 55% 60% 40% / 15% 15% 85% 85%"></div>
+
+          <!-- Sri Lanka -->
+          <div class="erg-l" style="width:4px;height:4px;top:104px;left:392px;
+            background:#388E3C;border-radius:50%"></div>
+
+          <!-- SE Asia -->
+          <div class="erg-l" style="width:22px;height:30px;top:72px;left:398px;
+            background:#2E7D32;border-radius:45%"></div>
+
+          <!-- Borneo / Sumatra -->
+          <div class="erg-l" style="width:14px;height:10px;top:98px;left:403px;
+            background:#1B5E20;border-radius:40%"></div>
+
+          <!-- Japan -->
+          <div class="erg-l" style="width:7px;height:20px;top:49px;left:409px;
+            background:#388E3C;border-radius:40% 60% 55% 45%"></div>
+
+          <!-- Australia — interior -->
+          <div class="erg-l" style="width:30px;height:28px;top:128px;left:396px;
+            background:#8D6E63;border-radius:45%"></div>
+
+          <!-- Australia — east coast -->
+          <div class="erg-l" style="width:10px;height:28px;top:128px;left:418px;
+            background:#388E3C;border-radius:30% 70% 55% 45%"></div>
+
+          <!-- New Zealand -->
+          <div class="erg-l" style="width:5px;height:15px;top:142px;left:431px;
+            background:#4CAF50;border-radius:40%"></div>
+
+          <!-- Antarctica -->
+          <div class="erg-l" style="width:220px;height:22px;top:200px;left:220px;
+            background:rgba(220,242,255,0.92);border-radius:0"></div>
+
+        </div><!-- /.erg-track -->
+
+        <!-- Latitude lines (static overlay) -->
+        <div class="erg-lats"></div>
+
+        <!-- 3-D sphere shading (topmost overlay) -->
+        <div class="erg-shade"></div>
+
+      </div><!-- /.erg-globe -->
+
+      <!-- Globe label -->
+      <div class="erg-label">{{ viewWidgetVars.LABEL_EARTH || 'E A R T H' }}</div>
+
+    </div><!-- /.erg-globe-area -->
+  </div><!-- /ng-hide collapsed -->
+</div>

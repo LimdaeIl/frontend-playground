@@ -1,0 +1,153 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/shinhanBanner-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<style type="text/css">
+.shb-edit-preview {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.shb-edit-preview-inner {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 72px;
+}
+.shb-edit-preview-inner.prev-blue     { background: #0046FF; }
+.shb-edit-preview-inner.prev-dark     { background: #001F80; }
+.shb-edit-preview-inner.prev-gradient { background: linear-gradient(135deg, #001F80, #0046FF 60%, #3A7BFF); }
+
+.shb-edit-preview-logo {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.shb-edit-preview-text { color: white; }
+.shb-edit-preview-name { font-size: 16px; font-weight: 700; }
+.shb-edit-preview-tag  { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 3px; }
+
+.shb-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.shb-toggle-row:last-child { border-bottom: none; }
+.shb-toggle-label { font-size: 13px; color: rgba(255,255,255,0.8); }
+</style>
+
+<form data-ng-submit="save()" class="noMargin" name="editForm"
+  data-ng-class="{'state-wait': processing}" novalidate>
+
+  <div class="modal-header">
+    <h3 class="modal-title col-md-9">신한금융그룹 배너 설정</h3>
+    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal"
+      aria-label="Close" id="close-edit-widget-form-btn">
+      <div aria-hidden="true" class="version-button">+</div>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <!-- 미리보기 -->
+    <div class="shb-edit-preview">
+      <div class="shb-edit-preview-inner"
+        data-ng-class="{
+          'prev-blue':     config.banner_style === 'blue'     || !config.banner_style,
+          'prev-dark':     config.banner_style === 'dark',
+          'prev-gradient': config.banner_style === 'gradient'
+        }">
+        <svg class="shb-edit-preview-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+          data-ng-if="config.show_logo !== false">
+          <defs>
+            <radialGradient id="shb-prev-grad" cx="38%" cy="32%" r="65%">
+              <stop offset="0%"   stop-color="#6BAAFF"/>
+              <stop offset="100%" stop-color="#002EC0"/>
+            </radialGradient>
+            <clipPath id="shb-prev-clip"><circle cx="50" cy="50" r="46"/></clipPath>
+          </defs>
+          <circle cx="50" cy="50" r="46" fill="url(#shb-prev-grad)"/>
+          <path d="M 34,29 C 34,29 62,24 63,36 C 64,46 38,44 36,53 C 34,62 60,66 66,72"
+            fill="none" stroke="white" stroke-width="8.5" stroke-linecap="round"
+            clip-path="url(#shb-prev-clip)"/>
+          <circle cx="50" cy="50" r="47" fill="none" stroke="#C8A020" stroke-width="1.5" opacity="0.7"/>
+        </svg>
+        <div class="shb-edit-preview-text">
+          <div class="shb-edit-preview-name">{{ config.title || '신한금융그룹' }}</div>
+          <div class="shb-edit-preview-tag" data-ng-if="config.show_tagline !== false">
+            {{ config.subtitle || '금융으로 세상을 이롭게' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 제목 -->
+    <div class="form-group"
+      data-ng-class="{ 'has-error': editForm.title.$invalid && editForm.title.$touched }">
+      <label for="shb-title" class="control-label">배너 제목 <span class="text-danger">*</span></label>
+      <input id="shb-title" name="title" type="text" class="form-control"
+        data-ng-model="config.title" required placeholder="신한금융그룹">
+      <div data-cs-messages="editForm.title"></div>
+    </div>
+
+    <!-- 부제목 / 태그라인 -->
+    <div class="form-group">
+      <label for="shb-subtitle" class="control-label">태그라인 (슬로건)</label>
+      <input id="shb-subtitle" name="subtitle" type="text" class="form-control"
+        data-ng-model="config.subtitle" placeholder="금융으로 세상을 이롭게">
+    </div>
+
+    <!-- 배너 스타일 -->
+    <div class="form-group">
+      <label class="control-label">배너 스타일</label>
+      <div class="btn-group" style="width:100%;display:flex;">
+        <button type="button" class="btn btn-sm"
+          style="flex:1;"
+          data-ng-repeat="s in bannerStyles"
+          data-ng-class="config.banner_style === s.value ? 'btn-primary' : 'btn-default'"
+          data-ng-click="config.banner_style = s.value">
+          {{ s.label }}
+        </button>
+      </div>
+    </div>
+
+    <!-- 표시 옵션 -->
+    <div class="form-group">
+      <label class="control-label">표시 옵션</label>
+      <div style="padding: 4px 0;">
+        <div class="shb-toggle-row">
+          <span class="shb-toggle-label">로고 표시</span>
+          <cs-toggle data-ng-model="config.show_logo"></cs-toggle>
+        </div>
+        <div class="shb-toggle-row">
+          <span class="shb-toggle-label">구분선 표시</span>
+          <cs-toggle data-ng-model="config.show_divider"></cs-toggle>
+        </div>
+        <div class="shb-toggle-row">
+          <span class="shb-toggle-label">태그라인 표시</span>
+          <cs-toggle data-ng-model="config.show_tagline"></cs-toggle>
+        </div>
+        <div class="shb-toggle-row">
+          <span class="shb-toggle-label">Since 1982 배지 표시</span>
+          <cs-toggle data-ng-model="config.show_est"></cs-toggle>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary">
+      <i class="icon icon-check margin-right-sm"></i>{{ viewWidgetVars.BTN_SAVE || '저장' }}
+    </button>
+    <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default" data-ng-click="cancel()">
+      <i class="icon icon-close margin-right-sm"></i>{{ viewWidgetVars.BTN_CLOSE || '닫기' }}
+    </button>
+  </div>
+</form>

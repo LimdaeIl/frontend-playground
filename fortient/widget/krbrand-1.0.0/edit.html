@@ -1,0 +1,105 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/krbrand-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<style>
+.krb-edit-preview {
+  background: linear-gradient(125deg, #001233, #00256C, #013A9B);
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(0,130,202,0.3);
+}
+.krb-edit-preview svg { width: 36px; height: 36px; flex-shrink: 0; }
+.krb-edit-preview-text { display: flex; flex-direction: column; gap: 1px; }
+.krb-edit-preview-kr { font-size: 14px; font-weight: 800; color: #fff; letter-spacing: 0.06em; font-family: 'Malgun Gothic', sans-serif; }
+.krb-edit-preview-en { font-size: 8px; font-weight: 700; color: rgba(100,195,255,0.7); letter-spacing: 0.3em; text-transform: uppercase; }
+</style>
+
+<form data-ng-submit="save()" class="noMargin" name="editKrbrandForm" novalidate>
+
+  <div class="modal-header">
+    <h3 class="modal-title col-md-9">KR Brand Banner 설정</h3>
+    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal"
+      aria-label="Close" id="close-edit-widget-form-btn">
+      <div aria-hidden="true" class="version-button">+</div>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <!-- 미리보기 -->
+    <div class="krb-edit-preview">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50,7 A43,43 0,0,1 93,50 A21.5,21.5 0,0,1 50,50 A21.5,21.5 0,0,0 7,50 A43,43 0,0,1 50,7 Z" fill="#0082CA"/>
+        <path d="M50,93 A43,43 0,0,1 7,50 A21.5,21.5 0,0,1 50,50 A21.5,21.5 0,0,0 93,50 A43,43 0,0,1 50,93 Z" fill="#00256C"/>
+        <circle cx="50" cy="28.5" r="11.5" fill="#00256C"/>
+        <circle cx="50" cy="71.5" r="11.5" fill="#0082CA"/>
+        <circle cx="50" cy="50" r="43" fill="none" stroke="rgba(100,190,255,0.4)" stroke-width="2"/>
+      </svg>
+      <div class="krb-edit-preview-text">
+        <div class="krb-edit-preview-kr">{{ config.companyName }}</div>
+        <div class="krb-edit-preview-en">{{ config.companyNameEn }}</div>
+      </div>
+    </div>
+
+    <!-- 한국어 회사명 -->
+    <div class="form-group">
+      <label class="control-label">회사명 (한국어)</label>
+      <input type="text" class="form-control"
+        data-ng-model="config.companyName" placeholder="대한항공">
+    </div>
+
+    <!-- 영문 회사명 -->
+    <div class="form-group">
+      <label class="control-label">Company Name (English)</label>
+      <input type="text" class="form-control"
+        data-ng-model="config.companyNameEn" placeholder="KOREAN AIR">
+    </div>
+
+    <!-- 태그라인 -->
+    <div class="form-group">
+      <label class="control-label">Tagline</label>
+      <input type="text" class="form-control"
+        data-ng-model="config.tagline" placeholder="Securing the Skies">
+    </div>
+
+    <!-- 부제목 (시계 아래) -->
+    <div class="form-group">
+      <label class="control-label">Subtitle (시계 하단 텍스트)</label>
+      <input type="text" class="form-control"
+        data-ng-model="config.subtitle" placeholder="Security Operations Center">
+    </div>
+
+    <!-- 표시 옵션 -->
+    <div class="form-group">
+      <label class="control-label">표시 옵션</label>
+      <div style="display:flex; gap:24px; margin-top:6px;">
+        <label style="display:flex;align-items:center;gap:7px;margin:0;font-weight:400;cursor:pointer;">
+          <input type="checkbox" data-ng-model="config.showLogo">
+          <span>태극 로고 표시</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:7px;margin:0;font-weight:400;cursor:pointer;">
+          <input type="checkbox" data-ng-model="config.showClock">
+          <span>실시간 시계 표시</span>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary">
+      <i class="icon icon-check margin-right-sm"></i>{{ viewWidgetVars.BTN_SAVE || 'Save' }}
+    </button>
+    <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default" data-ng-click="cancel()">
+      <i class="icon icon-close margin-right-sm"></i>{{ viewWidgetVars.BTN_CLOSE || 'Close' }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,26 @@
+{
+    "name": "fortinetbrandwidget",
+    "title": "Fortinet Brand Banner",
+    "subTitle": "Animated Fortinet brand banner with live clock and SOC badges",
+    "version": "1.0.0",
+    "published_date": 1773878400,
+    "releaseNotes": "available",
+    "metadata": {
+        "description": "Dark-themed animated Fortinet brand banner widget for dashboards. Features real-time digital clock, FortiSOAR SOC Platform badges, scan-line effects, and scrolling ticker.",
+        "pages": [
+            "Dashboard",
+            "View Panel",
+            "Reports",
+            "Listing"
+        ],
+        "certified": "No",
+        "publisher": "Korea SE Team",
+        "snapshots": [],
+        "help_online": "",
+        "compatibility": [
+            "7.6.1",
+            "7.6.5"
+        ]
+    },
+    "development": false
+}

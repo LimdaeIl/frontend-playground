@@ -1,0 +1,10 @@
+{
+  "KoreanAirBanner": {
+    "BTN_CLOSE": "닫기",
+    "BTN_SAVE": "저장",
+    "TXT_NO_RECS_FOUND": "데이터가 없습니다.",
+    "LABEL_REFRESH": "새로고침",
+    "LABEL_ME": "나",
+    "LABEL_ALL": "전체"
+  }
+}

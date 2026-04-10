@@ -1,0 +1,10 @@
+{
+  "KoreanAirBanner": {
+    "BTN_CLOSE": "关闭",
+    "BTN_SAVE": "保存",
+    "TXT_NO_RECS_FOUND": "没有找到数据。",
+    "LABEL_REFRESH": "刷新",
+    "LABEL_ME": "我",
+    "LABEL_ALL": "全部"
+  }
+}

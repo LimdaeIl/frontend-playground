@@ -1,0 +1,26 @@
+{
+    "name": "krbrand",
+    "title": "KR Brand Banner",
+    "subTitle": "\ub300\ud55c\ud56d\uacf5 \ube0c\ub79c\ub529 \ubc30\ub108 \uc704\uc82f",
+    "version": "1.0.0",
+    "published_date": 1742256000,
+    "releaseNotes": "available",
+    "metadata": {
+        "description": "\ub300\ud55c\ud56d\uacf5 \ube0c\ub79c\ub529 \uac10\uc131\uc758 \uc138\ub828\ub41c \ubc30\ub108\ud615 \uc704\uc82f. \ud0dc\uadf9 \uc2ec\ubcfc, \uc2e4\uc2dc\uac04 \uc2dc\uacc4, \ud604\ub300\uc801 CSS \uc560\ub2c8\uba54\uc774\uc158 \uc801\uc6a9.",
+        "pages": [
+            "Dashboard",
+            "View Panel",
+            "Reports",
+            "Listing"
+        ],
+        "certified": "No",
+        "publisher": "sangilhan",
+        "snapshots": [],
+        "help_online": "",
+        "compatibility": [
+            "7.6.1",
+            "7.6.5"
+        ]
+    },
+    "development": false
+}

@@ -1,0 +1,93 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/ftcbc-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<style>
+.ftcbc-edit-preview {
+  background: linear-gradient(125deg, #0C0404, #220C0C, #180808);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(238,49,36,0.3);
+}
+.ftcbc-edit-preview svg { width: 32px; height: 36px; flex-shrink: 0; }
+.ftcbc-edit-preview-text { display: flex; flex-direction: column; gap: 2px; }
+.ftcbc-edit-preview-org  { font-size: 14px; font-weight: 800; color: #fff; letter-spacing: 0.05em; font-family: 'Segoe UI', sans-serif; }
+.ftcbc-edit-preview-ctr  { font-size: 9px;  font-weight: 700; color: rgba(255,160,100,0.75); letter-spacing: 0.28em; text-transform: uppercase; }
+</style>
+
+<form data-ng-submit="save()" class="noMargin" name="editFtcbcForm" novalidate>
+
+  <div class="modal-header">
+    <h3 class="modal-title col-md-9">Fortinet Korea CBC 배너 설정</h3>
+    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal"
+      aria-label="Close" id="close-edit-widget-form-btn">
+      <div aria-hidden="true" class="version-button">+</div>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <!-- 미리보기 -->
+    <div class="ftcbc-edit-preview">
+      <svg viewBox="43 43 97 74" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#DA291C" d="M129.7,73.1v13.8h0h-21.5V73.1l0,0H129.7L129.7,73.1L129.7,73.1z M80.8,106.6L80.8,106.6l21.5,0v0V92.8H80.8
+          V106.6z M129.7,64.9c0-6.4-5.2-11.6-11.6-11.6l-9.9,0v13.8h21.5V64.9z M80.8,53.3v13.8l0,0h21.5l0,0V53.3v0L80.8,53.3L80.8,53.3z
+          M53.3,73.1L53.3,73.1v13.8l0,0h21.5V73.1l0,0H53.3L53.3,73.1z M108.2,106.6l9.9,0c6.4,0,11.6-5.2,11.6-11.6v-2.2h-21.5V106.6z
+          M53.3,95c0,6.4,5.2,11.6,11.6,11.6l9.9,0V92.8H53.3V95z M53.3,64.9v2.2h21.5V53.3l-9.9,0C58.5,53.3,53.3,58.5,53.3,64.9z"/>
+      </svg>
+      <div class="ftcbc-edit-preview-text">
+        <div class="ftcbc-edit-preview-org">{{ config.orgName }}</div>
+        <div class="ftcbc-edit-preview-ctr">{{ config.centerName }}</div>
+      </div>
+    </div>
+
+    <!-- 조직명 -->
+    <div class="form-group">
+      <label class="control-label">조직명</label>
+      <input type="text" class="form-control"
+        data-ng-model="config.orgName" placeholder="Fortinet Korea">
+    </div>
+
+    <!-- 센터명 -->
+    <div class="form-group">
+      <label class="control-label">센터명</label>
+      <input type="text" class="form-control"
+        data-ng-model="config.centerName" placeholder="Customer Briefing Center">
+    </div>
+
+    <!-- 태그라인 -->
+    <div class="form-group">
+      <label class="control-label">Tagline</label>
+      <input type="text" class="form-control"
+        data-ng-model="config.tagline" placeholder="Cybersecurity Excellence">
+    </div>
+
+    <!-- 표시 옵션 -->
+    <div class="form-group">
+      <label class="control-label">표시 옵션</label>
+      <div style="display:flex; gap:24px; margin-top:6px;">
+        <label style="display:flex;align-items:center;gap:7px;margin:0;font-weight:400;cursor:pointer;">
+          <input type="checkbox" data-ng-model="config.showLogo">
+          <span>Fortinet 쉴드 로고 표시</span>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary">
+      <i class="icon icon-check margin-right-sm"></i>{{ viewWidgetVars.BTN_SAVE || 'Save' }}
+    </button>
+    <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default" data-ng-click="cancel()">
+      <i class="icon icon-close margin-right-sm"></i>{{ viewWidgetVars.BTN_CLOSE || 'Close' }}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,454 @@
+<!-- Copyright start
+  MIT License
+  Copyright (c) 2025 Fortinet Inc
+  Copyright end -->
+
+<script src="widgets/installed/krbrand-1.0.0/widgetAssets/js/widgetUtility.service.js"></script>
+
+<style type="text/css">
+
+/* ══════════════════════════════════════════════════
+   KEYFRAMES
+══════════════════════════════════════════════════ */
+@keyframes krb-gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes krb-scan {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateX(400%); opacity: 0; }
+}
+@keyframes krb-logo-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-4px) rotate(1deg); }
+}
+@keyframes krb-logo-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(0,90,180,0.5)) drop-shadow(0 0 18px rgba(200,30,30,0.25)); }
+  50%       { filter: drop-shadow(0 0 14px rgba(0,90,180,0.7)) drop-shadow(0 0 28px rgba(200,30,30,0.4)); }
+}
+@keyframes krb-text-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes krb-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes krb-pulse-dot {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.15); }
+}
+@keyframes krb-clock-tick {
+  0%  { opacity: 1; }
+  49% { opacity: 1; }
+  50% { opacity: 0.6; }
+  99% { opacity: 0.6; }
+  100%{ opacity: 1; }
+}
+@keyframes krb-accent-line {
+  0%   { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ══════════════════════════════════════════════════
+   WRAPPER
+══════════════════════════════════════════════════ */
+.krb-wrap {
+  position: relative;
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+/* ══════════════════════════════════════════════════
+   BANNER BODY
+══════════════════════════════════════════════════ */
+.krb-banner {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: 128px;
+  background: linear-gradient(125deg,
+    #001233 0%,
+    #00256C 25%,
+    #013A9B 50%,
+    #00256C 75%,
+    #001233 100%);
+  background-size: 300% 300%;
+  animation: krb-gradient-shift 12s ease infinite;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+/* 배경 도트 패턴 */
+.krb-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(0,130,202,0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 스캔라인 빔 */
+.krb-scan-beam {
+  position: absolute;
+  top: 0; left: 0;
+  width: 22%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 160, 255, 0.07) 40%,
+    rgba(0, 200, 255, 0.12) 50%,
+    rgba(0, 160, 255, 0.07) 60%,
+    transparent 100%);
+  animation: krb-scan 8s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 상단 하이라이트 라인 */
+.krb-banner::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 180, 255, 0.6) 20%,
+    rgba(100, 210, 255, 0.9) 50%,
+    rgba(0, 180, 255, 0.6) 80%,
+    transparent 100%);
+  z-index: 2;
+}
+
+/* ══════════════════════════════════════════════════
+   COLLAPSE 컨트롤 (표준 FortiSOAR 호환)
+══════════════════════════════════════════════════ */
+.krb-collapse-btn {
+  position: absolute;
+  top: 8px; right: 10px;
+  z-index: 10;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+  color: rgba(255,255,255,0.5);
+  font-size: 10px;
+}
+.krb-collapse-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+/* ══════════════════════════════════════════════════
+   섹션 레이아웃
+══════════════════════════════════════════════════ */
+.krb-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px 20px 16px 20px;
+  gap: 0;
+}
+
+/* ── 로고 섹션 ─────────────────────────────────── */
+.krb-logo-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 24px;
+  border-right: 1px solid rgba(0,130,202,0.3);
+  margin-right: 24px;
+}
+.krb-taeguk {
+  width: 72px; height: 72px;
+  animation: krb-logo-float 5s ease-in-out infinite,
+             krb-logo-glow 3s ease-in-out infinite;
+}
+.krb-logo-label {
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: rgba(100, 200, 255, 0.55);
+  text-transform: uppercase;
+  margin-top: 5px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ── 브랜드 섹션 ────────────────────────────────── */
+.krb-brand-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: krb-text-in 0.7s ease-out forwards;
+}
+.krb-company-kr {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Segoe UI', sans-serif;
+  text-shadow: 0 2px 16px rgba(0, 130, 202, 0.5);
+}
+.krb-company-en {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(100, 195, 255, 0.85);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.krb-divider {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #0082CA, rgba(0,130,202,0.2));
+  border-radius: 2px;
+  margin: 8px 0;
+}
+.krb-tagline {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(180, 220, 255, 0.7);
+  letter-spacing: 0.05em;
+  font-style: italic;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ── 중앙 구분 섹션 (Fortinet 배지) ─────────────── */
+.krb-fortinet-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  border-left: 1px solid rgba(0,130,202,0.2);
+  border-right: 1px solid rgba(0,130,202,0.2);
+  margin: 0 4px;
+  gap: 8px;
+}
+.krb-fortinet-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.krb-fortinet-logo-svg {
+  width: 32px; height: 32px;
+  opacity: 0.85;
+}
+.krb-fortinet-label {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: rgba(255, 100, 40, 0.8);
+  text-transform: uppercase;
+}
+.krb-product-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(180, 210, 255, 0.65);
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+.krb-status-dot {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  color: rgba(52, 211, 153, 0.85);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.krb-status-dot-circle {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 6px rgba(52, 211, 153, 0.8);
+  animation: krb-pulse-dot 2s ease-in-out infinite;
+}
+
+/* ── 시계 섹션 ─────────────────────────────────── */
+.krb-clock-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding-left: 24px;
+  border-left: 1px solid rgba(0,130,202,0.3);
+  margin-left: 8px;
+  animation: krb-fade-in 1s ease-out forwards;
+}
+.krb-time {
+  font-size: 30px;
+  font-weight: 300;
+  color: #e0f2ff;
+  letter-spacing: 0.08em;
+  font-family: 'Courier New', 'Consolas', monospace;
+  text-shadow: 0 0 20px rgba(0,160,255,0.5), 0 0 40px rgba(0,130,202,0.25);
+  line-height: 1;
+  animation: krb-clock-tick 1s step-end infinite;
+}
+.krb-time-colon {
+  color: rgba(0, 180, 255, 0.9);
+}
+.krb-date-en {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(130, 195, 255, 0.65);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: right;
+}
+.krb-date-kr {
+  font-size: 9px;
+  color: rgba(100, 170, 255, 0.5);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+  text-align: right;
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+}
+.krb-subtitle-text {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(0, 130, 202, 0.7);
+  text-transform: uppercase;
+  margin-top: 6px;
+  text-align: right;
+}
+
+/* ══════════════════════════════════════════════════
+   하단 액센트 라인
+══════════════════════════════════════════════════ */
+.krb-accent-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    #001845 0%,
+    #0082CA 20%,
+    #00B4FF 40%,
+    #0082CA 60%,
+    #00256C 80%,
+    #001845 100%);
+  background-size: 200% 100%;
+  animation: krb-accent-line 4s linear infinite;
+  z-index: 4;
+}
+
+/* ══════════════════════════════════════════════════
+   COLLAPSED 상태
+══════════════════════════════════════════════════ */
+.krb-collapsed-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: linear-gradient(90deg, #001845, #00256C, #001845);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.krb-collapsed-bar .krb-taeguk-sm {
+  width: 22px; height: 22px;
+}
+.krb-collapsed-bar span {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(150, 210, 255, 0.8);
+  letter-spacing: 0.12em;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+</style>
+
+<div class="widget widget-container krb-wrap">
+
+  <!-- ── 펼친 상태 ── -->
+  <div class="krb-banner" data-ng-hide="collapsed">
+
+    <!-- 장식 요소 -->
+    <div class="krb-scan-beam"></div>
+    <div class="krb-accent-bar"></div>
+
+    <!-- 접기 버튼 -->
+    <button class="krb-collapse-btn" data-ng-click="collapsed = true" title="Collapse">
+      <span class="fa fa-caret-up"></span>
+    </button>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="krb-content">
+
+      <!-- 로고 -->
+      <div class="krb-logo-section" data-ng-if="config.showLogo !== false">
+        <img class="krb-taeguk"
+             src="widgets/installed/krbrand-1.0.0/widgetAssets/images/Korean_Air_Taegeuk.svg.png"
+             alt="Korean Air Taegeuk" />
+        <div class="krb-logo-label">대한항공</div>
+      </div>
+
+      <!-- 브랜드 텍스트 -->
+      <div class="krb-brand-section">
+        <div class="krb-company-kr">{{ config.companyName || '대한항공' }}</div>
+        <div class="krb-company-en">{{ config.companyNameEn || 'KOREAN AIR' }}</div>
+        <div class="krb-divider"></div>
+        <div class="krb-tagline">{{ config.tagline || 'Securing the Skies' }}</div>
+      </div>
+
+      <!-- Fortinet / FortiSOAR 배지 -->
+      <div class="krb-fortinet-section">
+        <div class="krb-fortinet-badge">
+          <!-- Fortinet 스타일 SVG (F 아이콘) -->
+          <svg class="krb-fortinet-logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="7" fill="rgba(220,60,20,0.15)" stroke="rgba(220,60,20,0.4)" stroke-width="1"/>
+            <text x="20" y="28" text-anchor="middle" font-size="22" font-weight="900"
+                  font-family="Arial,sans-serif" fill="#FF6030">F</text>
+          </svg>
+          <div class="krb-fortinet-label">Fortinet</div>
+        </div>
+        <div class="krb-product-label">FortiSOAR<br/>SOAR Platform</div>
+        <div class="krb-status-dot">
+          <div class="krb-status-dot-circle"></div>
+          LIVE
+        </div>
+      </div>
+
+      <!-- 시계 -->
+      <div class="krb-clock-section" data-ng-if="config.showClock !== false">
+        <div class="krb-time">
+          {{ currentTime.substring(0,2) }}<span class="krb-time-colon">:</span>{{ currentTime.substring(3,5) }}<span class="krb-time-colon">:</span>{{ currentTime.substring(6,8) }}
+        </div>
+        <div class="krb-date-en">{{ currentDateEn }}</div>
+        <div class="krb-date-kr">{{ currentDateKr }}</div>
+        <div class="krb-subtitle-text">{{ config.subtitle || 'Security Operations Center' }}</div>
+      </div>
+
+    </div><!-- /krb-content -->
+  </div><!-- /krb-banner -->
+
+  <!-- ── 접힌 상태 ── -->
+  <div class="krb-collapsed-bar" data-ng-show="collapsed" data-ng-click="collapsed = false">
+    <img class="krb-taeguk-sm"
+         src="widgets/installed/krbrand-1.0.0/widgetAssets/images/Korean_Air_Taegeuk.svg.png"
+         alt="Korean Air Taegeuk" />
+    <span>{{ config.companyName || '대한항공' }} · {{ config.companyNameEn || 'KOREAN AIR' }}</span>
+    <span class="fa fa-caret-down" style="color:rgba(100,180,255,0.5); margin-left:auto;"></span>
+  </div>
+
+</div>

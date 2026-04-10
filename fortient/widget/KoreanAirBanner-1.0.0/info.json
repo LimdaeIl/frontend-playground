@@ -1,0 +1,26 @@
+{
+    "name": "KoreanAirBanner",
+    "title": "Korean Air Banner",
+    "subTitle": "Korean Air CBC Blue Banner",
+    "version": "1.0.0",
+    "published_date": 1775050000,
+    "releaseNotes": "available",
+    "metadata": {
+        "description": "Korean Air blue CBC-style banner widget",
+        "pages": [
+            "Dashboard",
+            "View Panel",
+            "Reports",
+            "Listing"
+        ],
+        "certified": "No",
+        "publisher": "codex",
+        "snapshots": [],
+        "help_online": "",
+        "compatibility": [
+            "7.6.1",
+            "7.6.5"
+        ]
+    },
+    "development": false
+}

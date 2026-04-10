@@ -1,0 +1,13 @@
+{
+  "eRopKeimyungBanner": {
+    "BTN_CLOSE": "閉じる",
+    "BTN_SAVE": "保存",
+    "LBL_TITLE": "ウィジェットタイトル",
+    "LBL_MAIN_TITLE": "バナーメインタイトル",
+    "LBL_TICKER": "スクロールティッカー",
+    "PH_TICKER": "カスタムメッセージ（空白でデフォルト使用）",
+    "TXT_LABEL_SOC": "SOC 稼働中",
+    "TXT_LABEL_POWERED": "Powered by FortiSOAR",
+    "LABEL_REFRESH": "更新"
+  }
+}
